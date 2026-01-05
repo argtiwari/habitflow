@@ -1,3 +1,4 @@
+
 # ⚔️ HabitQuest RPG - Level Up Your Life
 
 ![License](https://img.shields.io/badge/License-MIT-blue.svg)
@@ -10,7 +11,7 @@
 ---
 
 ## 🌟 Live Demo
-👉 **[Play HabitQuest Now](https://habitgrow.vercel.app/)**
+👉 **[Play HabitQuest Now](https://habitquest-tau.vercel.app/)** 
 
 ---
 
@@ -21,7 +22,7 @@
 
 | **Focus Battle Mode** | **Victory & Journal** |
 |:---:|:---:|
-| ![Focus](public\avatar.png) | 
+| ![Focus](public\avatar.png) 
 
 ---
 
@@ -65,127 +66,7 @@ Want to run this locally? Follow these steps:
 
 1. **Clone the repo**
    ```bash
-   git clone [https://github.com/argtiwari/habitflow.git]
-   cd habitquest-rpg
-
-Install Dependencies
-
-   npm install
-
-   Firebase Setup
-
-Create a project on Firebase Console.
-
-Enable Authentication (Google) and Firestore Database.
-
-Create a file named src/firebase.js and add your config keys.
-
-Run the Server
-
-Bash
-
-npm run dev
-
-Koi baat nahi! Vercel automatic update tab karega jab aap apna naya code GitHub par bhejen (Push) ya CLI use karein.
-
-Agar aapne code change kiya hai par Vercel par nahi dikh raha, toh niche diye gaye 2 Steps mein se koi ek follow karein.
-
-Uske baad main aapko ek Professional & Impressive README dunga jo GitHub par recruiter ko impress kar dega! 🚀
-
-Part 1: Vercel Update Kaise Karein? 🔄
-Aapke paas 2 tarike hain. Jo aasaan lage wo karein:
-
-Tarika 1: GitHub Push (Recommended) Agar aapka Vercel GitHub se connected hai, toh bas ye commands terminal mein chalayein. Jaise hi code GitHub par jayega, Vercel apne aap naya version bana dega.
-
-Bash
-
-git add .
-git commit -m "Updated logo, credits and app icon"
-git push origin main
-(Ab 2 minute wait karein, Vercel khud update ho jayega).
-
-Tarika 2: Manual Vercel Command Agar GitHub connect nahi hai, toh seedha Vercel par bhejne ke liye ye command chalayein:
-
-Bash
-
-vercel --prod
-(Ye puchega settings ke liye, bas Enter dabate jaana).
-
-Part 2: Best "Impressive" README.md 📜✨
-GitHub par README.md file hi aapke project ka "Chehra" hoti hai. Apne project ke root folder mein README.md naam ki file banayein aur niche diya gaya pura code copy-paste kar dein.
-
-(Isme Maine Badges, Emojis, Features aur Setup Guide sab daal diya hai).
-
-Markdown
-
-# ⚔️ HabitQuest RPG - Level Up Your Life
-
-![License](https://img.shields.io/badge/License-MIT-blue.svg)
-![React](https://img.shields.io/badge/React-18.x-cyan.svg)
-![Firebase](https://img.shields.io/badge/Firebase-Auth%20%26%20DB-orange.svg)
-![Tailwind CSS](https://img.shields.io/badge/Styling-Tailwind-38bdf8.svg)
-
-> **"Gamify your life. Turn habits into monsters, earn XP, and become the hero of your own story."**
-
----
-
-## 🌟 Live Demo
-👉 **[Play HabitQuest Now](https://habitquest-rpg.vercel.app)** _(Replace with your actual Vercel Link)_
-
----
-
-## 🖼️ Screenshots
-| **Dashboard (Midnight Theme)** | **Avatar Evolution Shop** |
-|:---:|:---:|
-| ![Dashboard](public/logo.png) *Add screenshot here* | ![Shop](public/logo.png) *Add screenshot here* |
-
-| **Focus Battle Mode** | **Victory & Journal** |
-|:---:|:---:|
-| ![Focus](public/logo.png) *Add screenshot here* | ![Journal](public/logo.png) *Add screenshot here* |
-
----
-
-## 🚀 Key Features
-
-### 🎮 RPG Mechanics
-- **Quest System:** Turn daily tasks into quests.
-- **XP & Leveling:** Gain Experience (XP) to level up your character.
-- **Health System:** Failing a habit damages your HP. Don't die!
-- **Gold Economy:** Earn gold to buy new Avatars.
-
-### 🦁 Avatar Evolution
-- **Unlockable Heroes:** Buy different heroes (Ninja, Mage, Cyborg).
-- **Evolution Stages:** Heroes visually evolve at **Level 10** and **Level 20**.
-
-### 🔥 Productivity Tools
-- **Focus Mode:** A built-in Pomodoro timer to battle quests. (2x XP Reward!)
-- **Battle Chronicles:** A history journal that tracks your Victories and Defeats.
-- **Streak Counter:** Build momentum with daily streaks.
-
-### ☁️ Tech & Cloud
-- **Google Login:** Secure authentication via Firebase.
-- **Cloud Save:** Never lose your progress. Syncs across devices.
-- **PWA Ready:** Installable on mobile devices (Add to Home Screen).
-- **Themes:** Cyberpunk Neon, Royal Gold, and Midnight Blue modes.
-
----
-
-## 🛠️ Tech Stack
-
-- **Frontend:** React.js (Vite), Framer Motion (Animations)
-- **Styling:** Tailwind CSS, Lucide React (Icons)
-- **Backend/BaaS:** Firebase (Authentication, Firestore Database)
-- **Hosting:** Vercel
-
----
-
-## 💻 Installation & Setup
-
-Want to run this locally? Follow these steps:
-
-1. **Clone the repo**
-   ```bash
-   git clone [https://github.com/your-username/habitquest-rpg.git](https://github.com/your-username/habitquest-rpg.git)
+   git clone [https://github.com/argtiwari/habitflow.git](https://github.com/argtiwari/habitflow.git)
    cd habitquest-rpg
 Install Dependencies
 
