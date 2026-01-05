@@ -1,8 +1,9 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Check, Flame, Coins, Play, Zap, Trash2 } from 'lucide-react';
+import { Check, Flame, Coins, Play, Zap, Trash2, Skull } from 'lucide-react';
 
-const QuestCard = ({ title, difficulty, xpReward, goldReward, streak, onComplete, onStartFocus, onDelete }) => {
+// "onFail" ko list mein add karna zaroori hai 👇
+const QuestCard = ({ title, difficulty, xpReward, goldReward, streak, onComplete, onStartFocus, onDelete, onFail }) => {
   
   const getDifficultyColor = () => {
     if (difficulty === 'Hard') return 'border-red-500/50 shadow-red-900/20';
@@ -61,6 +62,13 @@ const QuestCard = ({ title, difficulty, xpReward, goldReward, streak, onComplete
       {/* Bottom Row: Actions (Focus & Check) */}
       <div className="flex gap-2 w-full">
         <button 
+          onClick={(e) => { e.stopPropagation(); onFail(); }}
+          className="w-10 bg-red-500/10 rounded-xl border border-red-500/30 flex items-center justify-center text-red-500 hover:bg-red-500 hover:text-white transition-all active:scale-95"
+          title="Give Up"
+        >
+          <Skull size={16} />
+        </button>
+        <button 
           onClick={(e) => { e.stopPropagation(); onStartFocus(); }}
           className="flex-1 py-3 bg-indigo-500/10 rounded-xl border border-indigo-500/30 flex items-center justify-center gap-2 text-indigo-400 hover:bg-indigo-500 hover:text-white transition-all active:scale-95 text-sm font-bold"
         >
@@ -69,9 +77,9 @@ const QuestCard = ({ title, difficulty, xpReward, goldReward, streak, onComplete
 
         <button 
           onClick={(e) => { e.stopPropagation(); onComplete(); }}
-          className="flex-1 py-3 bg-slate-800 rounded-xl border border-slate-700 flex items-center justify-center gap-2 text-slate-400 hover:bg-cyan-500 hover:text-slate-950 hover:border-cyan-400 transition-all active:scale-95 text-sm font-bold"
+          className="flex-1 py-3 bg-emerald-500/10 rounded-xl border border-emerald-500/30 flex items-center justify-center gap-2 text-emerald-500 hover:bg-emerald-500 hover:text-white transition-all active:scale-95 text-xs font-bold uppercase tracking-wider"
         >
-          <Check size={18} strokeWidth={3} /> DONE
+          <Check size={16} strokeWidth={3} /> Complete
         </button>
       </div>
 

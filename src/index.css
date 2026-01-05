@@ -1,1 +1,53 @@
 @import "tailwindcss";
+
+/* --- THEME DEFINITIONS --- */
+
+/* 1. Midnight (Default) */
+.theme-midnight {
+  --bg-primary: #020617; /* Slate-950 */
+  --bg-secondary: #0f172a; /* Slate-900 */
+  --accent: #06b6d4; /* Cyan-500 */
+  --accent-hover: #0891b2; /* Cyan-600 */
+  --text-highlight: #22d3ee; /* Cyan-400 */
+  --border-color: #1e293b; /* Slate-800 */
+}
+
+/* 2. Cyberpunk (Neon Mode) */
+.theme-cyberpunk {
+  --bg-primary: #090014; /* Deep Purple Black */
+  --bg-secondary: #1a0b2e; /* Dark Purple */
+  --accent: #d946ef; /* Fuchsia-500 (Neon Pink) */
+  --accent-hover: #c026d3; /* Fuchsia-600 */
+  --text-highlight: #e879f9; /* Fuchsia-400 */
+  --border-color: #4a044e; /* Dark Pink Border */
+}
+
+/* 3. Royal Gold (Luxury Mode) */
+.theme-gold {
+  --bg-primary: #0c0a09; /* Stone-950 (Warm Black) */
+  --bg-secondary: #1c1917; /* Stone-900 */
+  --accent: #eab308; /* Yellow-500 (Gold) */
+  --accent-hover: #ca8a04; /* Yellow-600 */
+  --text-highlight: #facc15; /* Yellow-400 */
+  --border-color: #451a03; /* Brownish Gold */
+}
+
+/* --- APPLYING VARIABLES --- */
+/* Ye body par apply hoga */
+body {
+  background-color: var(--bg-primary);
+  color: white;
+  transition: background-color 0.5s ease; /* Smooth Transition Effect */
+}
+
+/* Scrollbar Design */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-primary); 
+}
+::-webkit-scrollbar-thumb {
+  background: var(--accent); 
+  border-radius: 10px;
+}

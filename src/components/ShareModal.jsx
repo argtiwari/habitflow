@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Share2, Download, Loader2 } from 'lucide-react'; // Loader icon add kiya
 import html2canvas from 'html2canvas';
+import { getAvatarImage } from '../utils/getAvatar';
 
 const ShareModal = ({ isOpen, onClose, player }) => {
   const cardRef = useRef(null);
@@ -71,10 +72,8 @@ const ShareModal = ({ isOpen, onClose, player }) => {
               <div className="relative z-10 mb-4">
                 <div className="w-28 h-28 rounded-full border-4 border-cyan-400 shadow-xl overflow-hidden bg-slate-800">
                   <img 
-                    src={`https://api.dicebear.com/7.x/adventurer/svg?seed=${player.avatarSeed}`} 
-                    className="w-full h-full object-cover" 
-                    crossOrigin="anonymous" // Important for CORS
-                    alt="Avatar"
+                    src={getAvatarImage(player.avatarSeed, player.level)} 
+onError={(e) => { e.target.src = `https://api.dicebear.com/7.x/adventurer/svg?seed=${player.avatarSeed}` }}
                   />
                 </div>
                 <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 bg-yellow-500 text-slate-950 font-black text-xs px-3 py-1 rounded-full border border-yellow-300 uppercase tracking-wider">
