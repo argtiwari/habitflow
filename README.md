@@ -98,4 +98,4 @@ npm run dev
 🤝 Contributing
 Contributions, issues, and feature requests are welcome! Feel free to check the issues page.
 
-Made with ❤️ and Code by [Argcoding]
+Made with ❤️ and Code by [Argcoding] Thanks
