@@ -1,49 +1,73 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Check, Flame, Coins, Play, Zap, Trash2, Skull, Repeat, CalendarCheck } from 'lucide-react';
+// 'X' icon ko import kiya hai cross ke liye 👇
+import { Check, Flame, Coins, Play, Zap, Trash2, Skull, Repeat, CalendarCheck, Clock, X } from 'lucide-react';
 
-const QuestCard = ({ title, difficulty, xpReward, goldReward, streak, onComplete, onStartFocus, onDelete, onFail, type, lastCompletedDate, history = {} }) => {
+const QuestCard = ({ 
+  title, 
+  difficulty, 
+  xpReward, 
+  goldReward, 
+  streak, 
+  onComplete, 
+  onStartFocus, 
+  onDelete, 
+  onFail, 
+  type, 
+  lastCompletedDate, 
+  history = {},
+  scheduledTime // ✅ Fixed: 'props' hata kar seedha variable use kiya
+}) => {
   
   // Dates Logic
   const today = new Date().toISOString().split('T')[0];
   const isDaily = type === 'daily';
   const isDoneToday = isDaily && lastCompletedDate === today;
 
-  // --- WEEKLY TRACKER LOGIC (Last 7 Days) ---
+  // --- 🗓️ WEEKLY TRACKER (Tick & Cross Style) ---
   const renderWeeklyTracker = () => {
-    if (!isDaily) return null; // Sirf Daily quests ke liye
+    if (!isDaily) return null;
 
     const days = [];
-    // Pichle 6 din + Aaj (Total 7)
+    // Pichle 6 din + Aaj calculate kar rahe hain
     for (let i = 6; i >= 0; i--) {
       const d = new Date();
       d.setDate(d.getDate() - i);
-      const dateStr = d.toISOString().split('T')[0];
-      days.push(dateStr);
+      days.push(d.toISOString().split('T')[0]);
     }
 
     return (
-      <div className="flex gap-1.5 mt-3 mb-1">
+      <div className="flex gap-2 mt-4 mb-2 items-center">
         {days.map((date, index) => {
           const isDone = history[date] === true;
           const isToday = date === today;
-          
-          let dotClass = "bg-slate-800 border-slate-700"; // Default (Gray)
-
-          if (isDone) {
-            dotClass = "bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.6)] border-emerald-400"; // Green (Done)
-          } else if (!isDone && !isToday) {
-            dotClass = "bg-red-900/40 border-red-900/50"; // Red (Missed in past)
-          } else if (isToday && !isDone) {
-            dotClass = "bg-slate-700 border-slate-600 animate-pulse"; // Aaj ka din (Pending)
-          }
+          const isPast = date < today; // Aaj se pehle ka din
 
           return (
-            <div key={date} className="group relative">
-               <div className={`w-3 h-3 rounded-full border ${dotClass} transition-all`} />
-               {/* Tooltip on Hover */}
-               <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2 py-1 bg-black text-[10px] text-white rounded opacity-0 group-hover:opacity-100 pointer-events-none whitespace-nowrap z-10">
-                 {isToday ? "Today" : date.slice(5)}
+            <div key={date} className="group relative flex flex-col items-center">
+               
+               {/* 1. ✅ DONE (Green Tick) */}
+               {isDone ? (
+                 <div className="w-5 h-5 rounded-full bg-emerald-500/20 border border-emerald-500/50 flex items-center justify-center shadow-[0_0_8px_rgba(16,185,129,0.4)]">
+                   <Check size={12} className="text-emerald-500" strokeWidth={3} />
+                 </div>
+               ) 
+               /* 2. ❌ MISSED (Red Cross) - Sirf past dates ke liye */
+               : isPast ? (
+                 <div className="w-5 h-5 rounded-full bg-red-500/10 border border-red-500/30 flex items-center justify-center opacity-70">
+                   <X size={12} className="text-red-500" strokeWidth={3} />
+                 </div>
+               )
+               /* 3. ⏳ TODAY PENDING (Pulsing Dot) */
+               : (
+                 <div className={`w-5 h-5 rounded-full flex items-center justify-center border ${isToday ? 'border-slate-500 bg-slate-800 animate-pulse' : 'border-slate-800 bg-slate-900'}`}>
+                   <div className={`w-1.5 h-1.5 rounded-full ${isToday ? 'bg-cyan-400' : 'bg-slate-700'}`} />
+                 </div>
+               )}
+
+               {/* Tooltip (Date dikhane ke liye) */}
+               <div className="absolute bottom-full mb-2 bg-black/90 border border-slate-700 text-[10px] text-white px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-10 pointer-events-none">
+                 {isToday ? "Today" : new Date(date).toLocaleDateString('en-US', { weekday: 'short' })}
                </div>
             </div>
           );
@@ -69,7 +93,7 @@ const QuestCard = ({ title, difficulty, xpReward, goldReward, streak, onComplete
   return (
     <motion.div 
       initial={{ opacity: 0, y: 20 }} animate={{ opacity: isDoneToday ? 0.6 : 1, y: 0 }} whileTap={!isDoneToday ? { scale: 0.99 } : {}}
-      className={`relative border-l-4 ${getDifficultyColor()} p-4 rounded-r-xl mb-3 flex flex-col gap-2 shadow-lg backdrop-blur-sm transition-all`}
+      className={`relative border-l-4 ${getDifficultyColor()} p-4 rounded-r-xl mb-3 flex flex-col gap-2 shadow-lg backdrop-blur-sm transition-all select-none`}
     >
       
       {/* Top Row */}
@@ -84,10 +108,19 @@ const QuestCard = ({ title, difficulty, xpReward, goldReward, streak, onComplete
           </div>
 
           {!isDoneToday && (
-            <div className="flex items-center gap-3 text-xs text-slate-400 font-medium">
+            <div className="flex items-center gap-3 text-xs text-slate-400 font-medium flex-wrap">
               <span className="flex items-center gap-1 text-yellow-400"><Coins size={12} /> {goldReward} G</span>
               <span className="flex items-center gap-1 text-cyan-400"><Zap size={12} /> {xpReward} XP</span>
+              
+              {/* Streak Fire */}
               {streak > 0 && <span className="flex items-center gap-1 text-orange-500 animate-pulse"><Flame size={12} /> {streak}</span>}
+              
+              {/* ⏰ TIME BADGE - Error Fix: 'props.scheduledTime' ki jagah 'scheduledTime' */}
+              {scheduledTime && (
+                <span className="flex items-center gap-1 text-purple-400 border border-purple-500/30 px-1.5 rounded bg-purple-500/10">
+                  <Clock size={10} /> {scheduledTime}
+                </span>
+              )}
             </div>
           )}
         </div>
@@ -97,7 +130,7 @@ const QuestCard = ({ title, difficulty, xpReward, goldReward, streak, onComplete
         </button>
       </div>
 
-      {/* --- WEEKLY TRACKER DOTS --- */}
+      {/* --- RENDER NEW TRACKER --- */}
       {renderWeeklyTracker()}
 
       {/* Actions */}

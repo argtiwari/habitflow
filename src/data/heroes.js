@@ -1,32 +1,29 @@
 export const HEROES = [
-  { 
-    id: 'kai', 
-    name: 'Kai the Ninja', 
+  { id: 'kai', 
+    name: 'Tanjiro Kamado', 
     cost: 0, 
-    description: "Silent but deadly. Great for focus tasks." 
+    description: "Demon Slayer in the Demon Slayer Corps."     
   },
   { 
     id: 'elara', 
-    name: 'Elara the Mage', 
+    name: 'Roronoa Zoro', 
     cost: 500, 
-    description: "Master of wisdom and reading habits." 
+    description: "a master swordsman and gym habits." 
   },
   { 
     id: 'rex', 
-    name: 'Rex the Titan', 
+    name: 'Naruto Uzumaki', 
     cost: 1000, 
-    description: "Unstoppable force for workout goals." 
+    description: "is a shinobi of Konohagakure's Uzumaki clan and a reincarnation of Asura Ōtsutsuki." 
   },
-  { 
-    id: 'zephyr', 
-    name: 'Zephyr the Rogue', 
+  { id: 'nova', 
+    name: 'Monkey D. Luffy', 
     cost: 2500, 
-    description: "Quick and agile. Perfect for busy days." 
+    description: "strongest combatant of the Straw Hat Pirates due to his fearless attitude."    
   },
-  { 
-    id: 'nova', 
-    name: 'Nova the Cyborg', 
+  {  id: 'zephyr', 
+    name: 'Goku', 
     cost: 5000, 
-    description: "Future tech for coding mastery." 
+    description: "known for his Saiyan heritage, superhuman strength, pure heart, and relentless pursuit of becoming stronger"    
   }
 ];

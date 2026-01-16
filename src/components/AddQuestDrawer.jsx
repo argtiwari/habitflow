@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Target, Zap, Coins, Repeat } from 'lucide-react';
+import { X, Target, Zap, Coins, Repeat, Clock } from 'lucide-react';
 
 const AddQuestDrawer = ({ isOpen, onClose, onAdd }) => {
   const [title, setTitle] = useState('');
   const [difficulty, setDifficulty] = useState('Medium');
   const [xp, setXp] = useState(20);
   const [gold, setGold] = useState(10);
-  const [isDaily, setIsDaily] = useState(false); // New State for Daily Checkbox
+  const [isDaily, setIsDaily] = useState(false);
+  const [time, setTime] = useState(''); // New State for Time
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -18,18 +19,19 @@ const AddQuestDrawer = ({ isOpen, onClose, onAdd }) => {
       difficulty,
       xp: parseInt(xp),
       gold: parseInt(gold),
-      // New Data Fields 👇
-      type: isDaily ? 'daily' : 'one-time', 
-      lastCompletedDate: null, 
-      history: {} 
+      type: isDaily ? 'daily' : 'one-time',
+      scheduledTime: time || null, // Time save kar rahe hain
+      lastCompletedDate: null,
+      history: {}
     });
 
-    // Form Reset
+    // Reset
     setTitle('');
     setDifficulty('Medium');
     setXp(20);
     setGold(10);
     setIsDaily(false);
+    setTime('');
   };
 
   return (
@@ -49,18 +51,37 @@ const AddQuestDrawer = ({ isOpen, onClose, onAdd }) => {
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-4">
-              {/* Title Input */}
               <div className="relative">
                 <Target className="absolute top-3.5 left-3 text-cyan-500" size={20} />
                 <input 
-                  type="text" placeholder="Mission Title (e.g. Read 10 Pages)" 
+                  type="text" placeholder="Mission Title (e.g. Gym Workout)" 
                   value={title} onChange={(e) => setTitle(e.target.value)}
                   className="w-full bg-slate-950 border border-slate-800 rounded-xl py-3 pl-10 pr-4 text-white focus:border-cyan-500 outline-none font-bold"
                   autoFocus
                 />
               </div>
 
-              {/* Difficulty & Rewards */}
+              {/* Time Picker & Daily Checkbox Row */}
+              <div className="flex gap-3">
+                {/* Time Input */}
+                <div className="flex-1 bg-slate-950 border border-slate-800 rounded-xl flex items-center px-3 focus-within:border-cyan-500 transition-colors">
+                    <Clock size={18} className="text-slate-400 mr-2" />
+                    <input 
+                        type="time" 
+                        value={time}
+                        onChange={(e) => setTime(e.target.value)}
+                        className="bg-transparent text-white font-bold w-full py-3 outline-none appearance-none" 
+                    />
+                </div>
+
+                {/* Daily Checkbox */}
+                <label className={`flex-1 flex items-center justify-center gap-2 p-3 rounded-xl border transition-all cursor-pointer ${isDaily ? 'bg-indigo-500/20 border-indigo-500' : 'bg-slate-950 border-slate-800'}`}>
+                  <input type="checkbox" checked={isDaily} onChange={(e) => setIsDaily(e.target.checked)} className="hidden" />
+                  <Repeat size={18} className={isDaily ? "text-indigo-400" : "text-slate-500"} />
+                  <span className={`text-sm font-bold ${isDaily ? 'text-indigo-300' : 'text-slate-500'}`}>Daily</span>
+                </label>
+              </div>
+
               <div className="grid grid-cols-3 gap-2">
                 {['Easy', 'Medium', 'Hard'].map((diff) => (
                   <button
@@ -80,29 +101,10 @@ const AddQuestDrawer = ({ isOpen, onClose, onAdd }) => {
                 ))}
               </div>
 
-              <div className="flex gap-4 text-sm font-bold text-slate-400 justify-center py-2">
-                <span className="flex items-center gap-1 text-cyan-400"><Zap size={14}/> {xp} XP</span>
-                <span className="flex items-center gap-1 text-yellow-400"><Coins size={14}/> {gold} G</span>
-              </div>
-
-              {/* --- NEW: DAILY CHECKBOX --- */}
-              <label className={`flex items-center gap-3 p-4 rounded-xl border-2 transition-all cursor-pointer ${isDaily ? 'bg-indigo-500/10 border-indigo-500' : 'bg-slate-950 border-slate-800'}`}>
-                <div className={`w-6 h-6 rounded flex items-center justify-center border-2 ${isDaily ? 'bg-indigo-500 border-indigo-500 text-white' : 'border-slate-600'}`}>
-                  {isDaily && <Repeat size={14} />}
-                </div>
-                <input type="checkbox" checked={isDaily} onChange={(e) => setIsDaily(e.target.checked)} className="hidden" />
-                <div className="flex-1">
-                  <p className={`font-bold text-sm ${isDaily ? 'text-white' : 'text-slate-400'}`}>Repeat Daily</p>
-                  <p className="text-[10px] text-slate-500">Task will reset every morning</p>
-                </div>
-              </label>
-
-              {/* Create Button */}
               <button type="submit" className="w-full bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-black py-4 rounded-xl text-lg shadow-[0_0_20px_rgba(6,182,212,0.4)] active:scale-95 transition-all">
                 CREATE MISSION
               </button>
             </form>
-
           </motion.div>
         </>
       )}
