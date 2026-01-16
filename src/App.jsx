@@ -19,6 +19,7 @@ import SettingsDrawer from './components/SettingsDrawer';
 import RewardsDrawer from './components/RewardsDrawer';
 import GameToast from './components/GameToast';
 import SplashScreen from './components/SplashScreen';
+import InstallPrompt from './components/InstallPrompt'; 
 
 // Firebase
 import { auth, googleProvider, db } from './firebase';
@@ -397,6 +398,8 @@ function App() {
             setFocusQuest(null); 
         }} 
       />
+
+      <InstallPrompt />
 
       {/* --- HEADER --- */}
       <header className="px-6 pt-8 pb-4 flex justify-between items-center sticky top-0 backdrop-blur-md z-30 border-b border-[var(--border-color)] bg-[var(--bg-secondary-opacity)]">
